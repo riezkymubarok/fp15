@@ -33,9 +33,7 @@
 
             <div class="collapse navbar-collapse navbar-ex1-collapse" style="font-family:sans-serif;font-weight:lighter;font-size:18px;">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Tentang</a>
-                    </li>
-                    <li><a href="#">Pelayanan</a>
+                    <li><a href="tentang.html">Tentang</a>
                     </li>
                     <li><a href="kontak.html">Kontak</a>
                     </li>
@@ -288,6 +286,7 @@
 
 			$.getJSON('http://apilayer.net/api/live?access_key=1765b1f94dbc6547c53ae57650ebd872&currencies=IDR', function(data) {
 				convert_value = data.quotes.USDIDR;
+				//alert(convert_value);
 			});
 
 			$(".price-label").click(function(){
