@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Fashion - Network</title>
+    <title>15-Olshop</title>
 	<link rel="stylesheet" type="text/css" href="./asset/fa/web-fonts-with-css/css/fontawesome-all.css">
 	<link href="./asset/css/bootstrap.css" rel="stylesheet">
 	<link href="./asset/css/bootstrap-glyphicons.css" rel="stylesheet">
@@ -14,6 +14,8 @@
 	<script src="./asset/js/jquery-3.3.1.min.js"></script>
 	<script src="./asset/js/bootstrap.min.js"></script>
 	<script src="./asset/js/jquery.popupoverlay.js"></script>
+	<script type="text/javascript" src='https://maps.google.com/maps/api/js?key=AIzaSyDKtdDVECRaSY2svwFqQgzl2BFsb4pc6EM&libraries=places'></script>
+    <script type="text/javascript" src="./asset/js/locationpicker.jquery.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top gardient" role="navigation">
@@ -26,16 +28,16 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a  href="#">
-                	<img src="./asset/img/logo.png" height="50" width="180"></a>
+                	<img src="./asset/img/logo.png" height="50" width="150" style="border-radius:10px;"></a>
             </div>
 
             <div class="collapse navbar-collapse navbar-ex1-collapse" style="font-family:sans-serif;font-weight:lighter;font-size:18px;">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="http://localhost/onlineshop/#about">Tentang</a>
+                    <li><a href="#">Tentang</a>
                     </li>
-                    <li><a href="http://localhost/onlineshop/#services">Pelayanan</a>
+                    <li><a href="#">Pelayanan</a>
                     </li>
-                    <li><a href="http://localhost/onlineshop/#contact">Kontak</a>
+                    <li><a href="kontak.html">Kontak</a>
                     </li>
                 </ul>
             </div>
@@ -172,8 +174,8 @@
         			<ul>
         				<li><a href="http://demo.18maret.com/demo/mimity/v1.4/contact.html">Hubungi Kami</a></li>
         				<li><a href="http://localhost/onlineshop/#">YM: cs_</a></li>
-        				<li><a href="http://localhost/onlineshop/#">Telepon: +6281234567891</a></li>
-        				<li><a href="http://localhost/onlineshop/#">Email: cs.domain@domain.tld</a></li>
+        				<li><a href="http://localhost/onlineshop/#">Telepon: 081234567891</a></li>
+        				<li><a href="http://localhost/onlineshop/#">Email: olshop15@yahoo.com</a></li>
         			</ul>
         		</div>
         	</div>
@@ -238,14 +240,14 @@
 		<div class="row" style="text-align:left;padding: 20px 0 0 0;">
 			<div class="col-md-12"> 
 				<a href="javascript:void(0);" class="btn btn-warning"><i class="fas fa-cart-plus"></i> Tambah ke Keranjang</a>
-                <a href="javascript:void(0);" class="btn btn-info"><i class="fas fa-info"></i> Detail</a>
+                <a href="dtl_tas1.html" class="btn btn-info"><i class="fas fa-info"></i> Detail</a>
                 <a href="javascript:void(0);" class="btn btn-success"><i class="fas fa-check"></i> Beli</a>
 			</div>
 		</div>
 		</center>	
 	</div>
 	    <div id="fadeandscale2" class="well popuproduct" style="min-width:400px;margin-top:30px;position:relative;background-color: #ffffff;">
-    	<i class="fa fa-times-circle fadeandscale_close" style="font-size:23px;cursor: pointer;position:absolute;margin:-24px 0px 20px 362px;z-index:4000"></i>
+    	<i class="fa fa-times-circle fadeandscale2_close" style="font-size:23px;cursor: pointer;position:absolute;margin:-24px 0px 20px 362px;z-index:4000"></i>
     	<i class="fas fa-circle" style="color:white;font-size:26px;cursor: pointer;position:absolute;margin:-25px 0px 20px 360.5px;z-index:3000"></i>
     	<center>
 	    <p style="font-weight:bold;font-size:14px;">Catenzo Unisex Backpack/Ransel - Canvas 458 St 042</p><br>
@@ -266,7 +268,7 @@
 		<div class="row" style="text-align:left;padding: 20px 0 0 0;">
 			<div class="col-md-12"> 
 				<a href="javascript:void(0);" class="btn btn-warning"><i class="fas fa-cart-plus"></i> Tambah ke Keranjang</a>
-                <a href="javascript:void(0);" class="btn btn-info"><i class="fas fa-info"></i> Detail</a>
+                <a href="dtl_tas2.html" class="btn btn-info"><i class="fas fa-info"></i> Detail</a>
                 <a href="javascript:void(0);" class="btn btn-success"><i class="fas fa-check"></i> Beli</a>
 			</div>
 		</div>
@@ -274,7 +276,7 @@
 	</div>
 	<script>
 
-		var convert_value;
+		var convert_value = 0;
 
 		const numberFormatter = (x) => {
 		  var parts = x.toString().split(",");
@@ -283,15 +285,13 @@
 		}
 
 		$(document).ready(function(){
+
+			$.getJSON('http://apilayer.net/api/live?access_key=1765b1f94dbc6547c53ae57650ebd872&currencies=IDR', function(data) {
+				convert_value = data.quotes.USDIDR;
+			});
+
 			$(".price-label").click(function(){
 
-					if(!convert_value){
-						
-						$.getJSON('http://apilayer.net/api/live?access_key=1765b1f94dbc6547c53ae57650ebd872&currencies=IDR', function(data) {
-							convert_value=data.quotes.USDIDR;
-						});
-						
-					}
 					var hargIDR = parseFloat($(this).attr("val"))*convert_value;
 
 					$(this).attr("data-original-title","Rp "+numberFormatter(hargIDR));
@@ -313,7 +313,7 @@
 		$(document).ready(function () {
 		    $('.popuproduct').popup({
 		        pagecontainer: '.container',
-		        transition: 'all 0.3s',
+		        //transition: 'all 0.3s',
 		        vertical:'top',
 		    });
 		});
